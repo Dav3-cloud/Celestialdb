@@ -84,7 +84,8 @@ ALTER SEQUENCE public.comets_comets_id_seq OWNED BY public.comets.comets_id;
 
 CREATE TABLE public.galaxy (
     galaxy_id integer NOT NULL,
-    name character varying(30) NOT NULL
+    name character varying(30) NOT NULL,
+    star_name character varying(30)
 );
 
 
@@ -118,7 +119,8 @@ ALTER SEQUENCE public.galaxy_galaxy_id_seq OWNED BY public.galaxy.galaxy_id;
 
 CREATE TABLE public.moon (
     moon_id integer NOT NULL,
-    name character varying(30) NOT NULL
+    name character varying(30) NOT NULL,
+    habitable_moon boolean
 );
 
 
@@ -152,7 +154,9 @@ ALTER SEQUENCE public.moon_moon_id_seq OWNED BY public.moon.moon_id;
 
 CREATE TABLE public.planet (
     planet_id integer NOT NULL,
-    name character varying(30) NOT NULL
+    name character varying(30) NOT NULL,
+    goldy_locks_planet boolean,
+    habitable_moon boolean
 );
 
 
@@ -186,7 +190,8 @@ ALTER SEQUENCE public.planet_planet_id_seq OWNED BY public.planet.planet_id;
 
 CREATE TABLE public.star (
     star_id integer NOT NULL,
-    name character varying(30) NOT NULL
+    star_name character varying(30),
+    goldy_locks_planet boolean
 );
 
 
@@ -265,12 +270,14 @@ ALTER TABLE ONLY public.star ALTER COLUMN star_id SET DEFAULT nextval('public.st
 -- Data for Name: moon; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.moon VALUES (2, 'Titan', true);
 
 
 --
 -- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.planet VALUES (1, 'Pluto', NULL, true);
 
 
 --
@@ -297,14 +304,14 @@ SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 1, false);
 -- Name: moon_moon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.moon_moon_id_seq', 1, false);
+SELECT pg_catalog.setval('public.moon_moon_id_seq', 2, true);
 
 
 --
 -- Name: planet_planet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.planet_planet_id_seq', 1, false);
+SELECT pg_catalog.setval('public.planet_planet_id_seq', 1, true);
 
 
 --
@@ -320,6 +327,14 @@ SELECT pg_catalog.setval('public.star_star_id_seq', 1, false);
 
 ALTER TABLE ONLY public.comets
     ADD CONSTRAINT comets_comets_id_key UNIQUE (comets_id);
+
+
+--
+-- Name: comets comets_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.comets
+    ADD CONSTRAINT comets_pkey PRIMARY KEY (comets_id);
 
 
 --
@@ -339,6 +354,14 @@ ALTER TABLE ONLY public.galaxy
 
 
 --
+-- Name: galaxy galaxy_star_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.galaxy
+    ADD CONSTRAINT galaxy_star_name_key UNIQUE (star_name);
+
+
+--
 -- Name: moon moon_moon_id_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
@@ -352,6 +375,14 @@ ALTER TABLE ONLY public.moon
 
 ALTER TABLE ONLY public.moon
     ADD CONSTRAINT moon_pkey PRIMARY KEY (moon_id);
+
+
+--
+-- Name: planet planet_habitable_moon_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT planet_habitable_moon_key UNIQUE (habitable_moon);
 
 
 --
@@ -371,6 +402,14 @@ ALTER TABLE ONLY public.planet
 
 
 --
+-- Name: star star_goldy_locks_planet_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT star_goldy_locks_planet_key UNIQUE (goldy_locks_planet);
+
+
+--
 -- Name: star star_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
@@ -384,6 +423,30 @@ ALTER TABLE ONLY public.star
 
 ALTER TABLE ONLY public.star
     ADD CONSTRAINT star_star_id_key UNIQUE (star_id);
+
+
+--
+-- Name: moon moon_habitable_moon_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.moon
+    ADD CONSTRAINT moon_habitable_moon_fkey FOREIGN KEY (habitable_moon) REFERENCES public.planet(habitable_moon);
+
+
+--
+-- Name: planet planet_goldy_locks_planet_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT planet_goldy_locks_planet_fkey FOREIGN KEY (goldy_locks_planet) REFERENCES public.star(goldy_locks_planet);
+
+
+--
+-- Name: star star_star_name_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT star_star_name_fkey FOREIGN KEY (star_name) REFERENCES public.galaxy(star_name);
 
 
 --
