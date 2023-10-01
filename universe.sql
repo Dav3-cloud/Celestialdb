@@ -119,7 +119,7 @@ ALTER SEQUENCE public.galaxy_galaxy_id_seq OWNED BY public.galaxy.galaxy_id;
 
 CREATE TABLE public.moon (
     moon_id integer NOT NULL,
-    moon_name text
+    moon_name text NOT NULL
 );
 
 
@@ -153,7 +153,7 @@ ALTER SEQUENCE public.moon_moon_id_seq OWNED BY public.moon.moon_id;
 
 CREATE TABLE public.planet (
     planet_id integer NOT NULL,
-    planet_name character varying(30),
+    planet_name character varying(30) NOT NULL,
     moon_name text
 );
 
@@ -188,7 +188,7 @@ ALTER SEQUENCE public.planet_planet_id_seq OWNED BY public.planet.planet_id;
 
 CREATE TABLE public.star (
     star_id integer NOT NULL,
-    star_name character varying(30),
+    star_name character varying(30) NOT NULL,
     planet_name character varying(30)
 );
 
@@ -268,6 +268,14 @@ INSERT INTO public.galaxy VALUES (3, 'Black Eye', 'Vega');
 INSERT INTO public.galaxy VALUES (4, 'Black Eye', 'Spica');
 INSERT INTO public.galaxy VALUES (5, 'Milky Way', 'Altair');
 INSERT INTO public.galaxy VALUES (6, 'Milky Way', 'Rigel');
+INSERT INTO public.galaxy VALUES (7, 'Pinwheel', 'Casio');
+INSERT INTO public.galaxy VALUES (8, 'Pinwheel', 'Sars');
+INSERT INTO public.galaxy VALUES (9, 'Cartwheel', 'Sosia');
+INSERT INTO public.galaxy VALUES (10, 'Cartwheel', 'Wisper');
+INSERT INTO public.galaxy VALUES (11, 'Sombrero', 'Jaguar');
+INSERT INTO public.galaxy VALUES (12, 'Sombrero', 'Quetzal');
+INSERT INTO public.galaxy VALUES (13, 'Cigar', 'Ozuma');
+INSERT INTO public.galaxy VALUES (14, 'Cigar', 'Tayo');
 
 
 --
@@ -281,6 +289,19 @@ INSERT INTO public.moon VALUES (6, 'Oberon');
 INSERT INTO public.moon VALUES (7, 'Europa');
 INSERT INTO public.moon VALUES (8, 'Titan');
 INSERT INTO public.moon VALUES (9, 'Dione');
+INSERT INTO public.moon VALUES (24, 'Hercules');
+INSERT INTO public.moon VALUES (25, 'Jinx');
+INSERT INTO public.moon VALUES (26, 'Ying');
+INSERT INTO public.moon VALUES (27, 'Yang');
+INSERT INTO public.moon VALUES (28, 'Cog');
+INSERT INTO public.moon VALUES (29, 'Garden');
+INSERT INTO public.moon VALUES (30, 'Ionos');
+INSERT INTO public.moon VALUES (31, 'Beach');
+INSERT INTO public.moon VALUES (32, 'Poppo');
+INSERT INTO public.moon VALUES (33, 'Blue');
+INSERT INTO public.moon VALUES (34, 'Tara');
+INSERT INTO public.moon VALUES (35, 'Domino');
+INSERT INTO public.moon VALUES (36, 'Altlas');
 
 
 --
@@ -294,6 +315,19 @@ INSERT INTO public.planet VALUES (6, 'Naiobi', 'Europa');
 INSERT INTO public.planet VALUES (7, 'Jessup', 'Titan');
 INSERT INTO public.planet VALUES (8, 'Nana', 'Dione');
 INSERT INTO public.planet VALUES (1, 'Lost', 'Strange');
+INSERT INTO public.planet VALUES (9, 'Leon', 'Hercules');
+INSERT INTO public.planet VALUES (10, 'Leon', 'Jinx');
+INSERT INTO public.planet VALUES (11, 'Rust', 'Ying');
+INSERT INTO public.planet VALUES (12, 'Rust', 'Yang');
+INSERT INTO public.planet VALUES (13, 'Piotr', 'Cog');
+INSERT INTO public.planet VALUES (14, 'Piotr', 'Garden');
+INSERT INTO public.planet VALUES (15, 'Talos', 'Ionos');
+INSERT INTO public.planet VALUES (16, 'Dooly', 'Beach');
+INSERT INTO public.planet VALUES (17, 'Flood', 'Poppo');
+INSERT INTO public.planet VALUES (18, 'Tusk', 'Blue');
+INSERT INTO public.planet VALUES (19, 'Bright', 'Tara');
+INSERT INTO public.planet VALUES (20, 'Bright', 'Domino');
+INSERT INTO public.planet VALUES (21, 'Bright', 'Altlas');
 
 
 --
@@ -307,6 +341,14 @@ INSERT INTO public.star VALUES (5, 'Spica', 'Naiobi');
 INSERT INTO public.star VALUES (6, 'Altair', 'Jessup');
 INSERT INTO public.star VALUES (7, 'Rigel', 'Nana');
 INSERT INTO public.star VALUES (1, 'Alpheratz', 'Lost');
+INSERT INTO public.star VALUES (8, 'Casio', 'Leon');
+INSERT INTO public.star VALUES (9, 'Sars', 'Rust');
+INSERT INTO public.star VALUES (10, 'Sosia', 'Piotr');
+INSERT INTO public.star VALUES (11, 'Wisper', 'Talos');
+INSERT INTO public.star VALUES (12, 'Jaguar', 'Dooly');
+INSERT INTO public.star VALUES (13, 'Quetzal', 'Flood');
+INSERT INTO public.star VALUES (14, 'Ozuma', 'Tusk');
+INSERT INTO public.star VALUES (15, 'Tayo', 'Bright');
 
 
 --
@@ -320,28 +362,28 @@ SELECT pg_catalog.setval('public.comets_comets_id_seq', 1, false);
 -- Name: galaxy_galaxy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 6, true);
+SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 14, true);
 
 
 --
 -- Name: moon_moon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.moon_moon_id_seq', 10, true);
+SELECT pg_catalog.setval('public.moon_moon_id_seq', 36, true);
 
 
 --
 -- Name: planet_planet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.planet_planet_id_seq', 8, true);
+SELECT pg_catalog.setval('public.planet_planet_id_seq', 21, true);
 
 
 --
 -- Name: star_star_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.star_star_id_seq', 7, true);
+SELECT pg_catalog.setval('public.star_star_id_seq', 15, true);
 
 
 --
